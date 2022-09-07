@@ -11,9 +11,9 @@ use crate::{
     ContractError, Cw721Contract, ExecuteMsg, Extension, InstantiateMsg, MintMsg, QueryMsg,
 };
 
-const MINTER: &str = "merlin";
-const CONTRACT_NAME: &str = "Magic Power";
-const SYMBOL: &str = "MGK";
+const MINTER: &str = "ninja0x";
+const CONTRACT_NAME: &str = "InjectivePunks";
+const SYMBOL: &str = "PUNKS";
 
 fn setup_contract(deps: DepsMut<'_>) -> Cw721Contract<'static, Extension, Empty, Empty, Empty> {
     let contract = Cw721Contract::default();
@@ -72,7 +72,7 @@ fn minting() {
     let contract = setup_contract(deps.as_mut());
 
     let token_id = "petrify".to_string();
-    let token_uri = "https://www.merriam-webster.com/dictionary/petrify".to_string();
+    let token_uri = "https://injectivepunks.com/".to_string();
 
     let mint_msg = ExecuteMsg::Mint(MintMsg::<Extension> {
         token_id: token_id.clone(),
@@ -151,7 +151,7 @@ fn burning() {
     let contract = setup_contract(deps.as_mut());
 
     let token_id = "petrify".to_string();
-    let token_uri = "https://www.merriam-webster.com/dictionary/petrify".to_string();
+    let token_uri = "https://injectivepunks.com/".to_string();
 
     let mint_msg = ExecuteMsg::Mint(MintMsg::<Extension> {
         token_id: token_id.clone(),
@@ -200,8 +200,8 @@ fn transferring_nft() {
     let contract = setup_contract(deps.as_mut());
 
     // Mint a token
-    let token_id = "melt".to_string();
-    let token_uri = "https://www.merriam-webster.com/dictionary/melt".to_string();
+    let token_id = "PUNKS".to_string();
+    let token_uri = "https://injectivepunks.com/".to_string();
 
     let mint_msg = ExecuteMsg::Mint(MintMsg::<Extension> {
         token_id: token_id.clone(),
@@ -254,8 +254,8 @@ fn sending_nft() {
     let contract = setup_contract(deps.as_mut());
 
     // Mint a token
-    let token_id = "melt".to_string();
-    let token_uri = "https://www.merriam-webster.com/dictionary/melt".to_string();
+    let token_id = "PUNKS".to_string();
+    let token_uri = "https://injectivepunks.com/".to_string();
 
     let mint_msg = ExecuteMsg::Mint(MintMsg::<Extension> {
         token_id: token_id.clone(),
