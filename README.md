@@ -1,5 +1,5 @@
 # InjectivePunks NFT
-Implementation of the NFT project InjectivePanks using CosmVasm. Includes:
+Implementation of the NFT project InjectivePunks using CosmVasm. Includes:
 - The basic logic of the contract,
 - Methods for transfer tokens, mint and burning.
 
