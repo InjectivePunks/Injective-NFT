@@ -1,0 +1,155 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AllNftInfoResponse",
+  "type": "object",
+  "required": [
+    "access",
+    "info"
+  ],
+  "properties": {
+    "access": {
+      "description": "",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OwnerOfResponse"
+        }
+      ]
+    },
+    "info": {
+      "description": "",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NftInfoResponse_for_Nullable_Empty"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "Approval": {
+      "type": "object",
+      "required": [
+        "expires",
+        "spender"
+      ],
+      "properties": {
+        "expires": {
+          "description": "",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Expiration"
+            }
+          ]
+        },
+        "spender": {
+          "description": "",
+          "type": "string"
+        }
+      }
+    },
+    "Empty": {
+      "description": "",
+      "type": "object"
+    },
+    "Expiration": {
+      "description": "",
+      "oneOf": [
+        {
+          "description": "",
+          "type": "object",
+          "required": [
+            "at_height"
+          ],
+          "properties": {
+            "at_height": {
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0.0
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "description": "",
+          "type": "object",
+          "required": [
+            "at_time"
+          ],
+          "properties": {
+            "at_time": {
+              "$ref": "#/definitions/Timestamp"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "description": "",
+          "type": "object",
+          "required": [
+            "never"
+          ],
+          "properties": {
+            "never": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "NftInfoResponse_for_Nullable_Empty": {
+      "type": "object",
+      "properties": {
+        "extension": {
+          "description": "",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Empty"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "token_uri": {
+          "description": "",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "OwnerOfResponse": {
+      "type": "object",
+      "required": [
+        "approvals",
+        "owner"
+      ],
+      "properties": {
+        "approvals": {
+          "description": "",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Approval"
+          }
+        },
+        "owner": {
+          "description": "",
+          "type": "string"
+        }
+      }
+    },
+    "Timestamp": {
+      "description": "",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Uint64"
+        }
+      ]
+    },
+    "Uint64": {
+      "description": "",
+      "type": "string"
+    }
+  }
+}
