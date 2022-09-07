@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OwnerOfResponse",
+  "type": "object",
+  "required": [
+    "approvals",
+    "owner"
+  ],
+  "properties": {
+    "approvals": {
+      "description": "",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Approval"
+      }
+    },
+    "owner": {
+      "description": "Owner of the token",
+      "type": "string"
+    }
+  },
+  "definitions": {
+    "Approval": {
+      "type": "object",
+      "required": [
+        "expires",
+        "spender"
+      ],
+      "properties": {
+        "expires": {
+          "description": "",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Expiration"
+            }
+          ]
+        },
+        "spender": {
+          "description": "",
+          "type": "string"
+        }
+      }
+    },
+    "Expiration": {
+      "description": "",
+      "oneOf": [
+        {
+          "description": "",
+          "type": "object",
+          "required": [
+            "at_height"
+          ],
+          "properties": {
+            "at_height": {
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0.0
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "description": "",
+          "type": "object",
+          "required": [
+            "at_time"
+          ],
+          "properties": {
+            "at_time": {
+              "$ref": "#/definitions/Timestamp"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "description": "",
+          "type": "object",
+          "required": [
+            "never"
+          ],
+          "properties": {
+            "never": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Timestamp": {
+      "description": "",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Uint64"
+        }
+      ]
+    },
+    "Uint64": {
+      "description": "",
+      "type": "string"
+    }
+  }
+}
