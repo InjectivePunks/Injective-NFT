@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "InstantiateMsg",
+  "type": "object",
+  "required": [
+    "minter",
+    "name",
+    "symbol"
+  ],
+  "properties": {
+    "minter": {
+      "description": "The minter is the only one who can create new NFTs.",
+      "type": "string"
+    },
+    "name": {
+      "description": "InjectivePunks",
+      "type": "string"
+    },
+    "symbol": {
+      "description": "PUNKS",
+      "type": "string"
+    }
+  }
+}
