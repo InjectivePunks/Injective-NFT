@@ -1,0 +1,331 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ExecuteMsg",
+  "description": "",
+  "oneOf": [
+    {
+      "description": "",
+      "type": "object",
+      "required": [
+        "transfer_nft"
+      ],
+      "properties": {
+        "transfer_nft": {
+          "type": "object",
+          "required": [
+            "recipient",
+            "token_id"
+          ],
+          "properties": {
+            "recipient": {
+              "type": "string"
+            },
+            "token_id": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "description": "",
+      "type": "object",
+      "required": [
+        "send_nft"
+      ],
+      "properties": {
+        "send_nft": {
+          "type": "object",
+          "required": [
+            "contract",
+            "msg",
+            "token_id"
+          ],
+          "properties": {
+            "contract": {
+              "type": "string"
+            },
+            "msg": {
+              "$ref": "#/definitions/Binary"
+            },
+            "token_id": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "description": "",
+      "type": "object",
+      "required": [
+        "approve"
+      ],
+      "properties": {
+        "approve": {
+          "type": "object",
+          "required": [
+            "spender",
+            "token_id"
+          ],
+          "properties": {
+            "expires": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Expiration"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "spender": {
+              "type": "string"
+            },
+            "token_id": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "description": "Remove previously granted Approval",
+      "type": "object",
+      "required": [
+        "revoke"
+      ],
+      "properties": {
+        "revoke": {
+          "type": "object",
+          "required": [
+            "spender",
+            "token_id"
+          ],
+          "properties": {
+            "spender": {
+              "type": "string"
+            },
+            "token_id": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "description": "",
+      "type": "object",
+      "required": [
+        "approve_all"
+      ],
+      "properties": {
+        "approve_all": {
+          "type": "object",
+          "required": [
+            "operator"
+          ],
+          "properties": {
+            "expires": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Expiration"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "operator": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "description": "Remove previously granted ApproveAll permission",
+      "type": "object",
+      "required": [
+        "revoke_all"
+      ],
+      "properties": {
+        "revoke_all": {
+          "type": "object",
+          "required": [
+            "operator"
+          ],
+          "properties": {
+            "operator": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "description": "Mint a new NFT, can only be called by the contract minter",
+      "type": "object",
+      "required": [
+        "mint"
+      ],
+      "properties": {
+        "mint": {
+          "$ref": "#/definitions/MintMsg_for_Nullable_Empty"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "description": "Burn an NFT the sender has access to",
+      "type": "object",
+      "required": [
+        "burn"
+      ],
+      "properties": {
+        "burn": {
+          "type": "object",
+          "required": [
+            "token_id"
+          ],
+          "properties": {
+            "token_id": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "description": "Extension msg",
+      "type": "object",
+      "required": [
+        "extension"
+      ],
+      "properties": {
+        "extension": {
+          "type": "object",
+          "required": [
+            "msg"
+          ],
+          "properties": {
+            "msg": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  ],
+  "definitions": {
+    "Binary": {
+      "description": "",
+      "type": "string"
+    },
+    "Empty": {
+      "description": "",
+      "type": "object"
+    },
+    "Expiration": {
+      "description": "",
+      "oneOf": [
+        {
+          "description": "",
+          "type": "object",
+          "required": [
+            "at_height"
+          ],
+          "properties": {
+            "at_height": {
+              "type": "integer",
+              "format": "uint64",
+              "minimum": 0.0
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "description": "",
+          "type": "object",
+          "required": [
+            "at_time"
+          ],
+          "properties": {
+            "at_time": {
+              "$ref": "#/definitions/Timestamp"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "description": "",
+          "type": "object",
+          "required": [
+            "never"
+          ],
+          "properties": {
+            "never": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "MintMsg_for_Nullable_Empty": {
+      "type": "object",
+      "required": [
+        "owner",
+        "token_id"
+      ],
+      "properties": {
+        "extension": {
+          "description": "",
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Empty"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "owner": {
+          "description": ",
+          "type": "string"
+        },
+        "token_id": {
+          "description": "",
+          "type": "string"
+        },
+        "token_uri": {
+          "description": "",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "Timestamp": {
+      "description": "",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Uint64"
+        }
+      ]
+    },
+    "Uint64": {
+      "description": "",
+      "type": "string"
+    }
+  }
+}
