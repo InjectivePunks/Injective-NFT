@@ -47,3 +47,49 @@ pub mod entry {
         tract.query(deps, env, msg)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    use cosmwasm_std::testing::{mock_dependencies, mock_env, mock_info};
+    use cw721::Cw721Query;
+
+    const CREATOR: &str = "creator";
+
+    #[test]
+    fn use_metadata_extension() {
+        let mut deps = mock_dependencies();
+        let contract = Cw721MetadataContract::default();
+
+        let info = mock_info(CREATOR, &[]);
+        let init_msg = InstantiateMsg {
+            name: "InjectivePunks".to_string(),
+            symbol: "PUNKS".to_string(),
+            minter: CREATOR.to_string(),
+        };
+        contract
+            .instantiate(deps.as_mut(), mock_env(), info.clone(), init_msg)
+            .unwrap();
+
+        let token_id = "Enterprise";
+        let mint_msg = MintMsg {
+            token_id: token_id.to_string(),
+            owner: "john".to_string(),
+            token_uri: Some("hhttps://injectivepunks.com/data/object.json".into()),
+            extension: Some(Metadata {
+                description: Some("Punk-description".into()),
+                name: Some("Punk#1".to_string()),
+                ..Metadata::default()
+            }),
+        };
+        let exec_msg = ExecuteMsg::Mint(mint_msg.clone());
+        contract
+            .execute(deps.as_mut(), mock_env(), info, exec_msg)
+            .unwrap();
+
+        let res = contract.nft_info(deps.as_ref(), token_id.into()).unwrap();
+        assert_eq!(res.token_uri, mint_msg.token_uri);
+        assert_eq!(res.extension, mint_msg.extension);
+    }
+}
