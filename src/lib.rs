@@ -72,7 +72,7 @@ mod tests {
             .instantiate(deps.as_mut(), mock_env(), info.clone(), init_msg)
             .unwrap();
 
-        let token_id = "Enterprise";
+        let token_id = "PUNKS";
         let mint_msg = MintMsg {
             token_id: token_id.to_string(),
             owner: "john".to_string(),
